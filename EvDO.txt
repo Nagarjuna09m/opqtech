@@ -1,0 +1,647 @@
+What is DevOps? 
+DevOps is a software development practice that promotes collaboration between development and operations, resulting in faster and more reliable(good in quality and perfornamce,trusted) software delivery.
+
+What is Linux?
+Linux is a UNIX like open-source operating system that provides advantages over other operating systems.
+Its features are : 
+• Free 
+• Secure 
+• Lightweight 
+• Stability 
+• Performance
+
+Commands
+# clear or Ctrl+l 	(Clearscreen)
+# exit 				(Exit from command prompt)
+# cal 				(Calender)
+# date 				(Date)
+# whatis <command> 	(Uses of that command)
+# man <command>		(Details of that command)
+
+----------------------------------------------------------------------------------------------------
+To create file and directories:
+mkdir <directory_name> 	--> To create a directory_name
+touch <file_name> 		--> To create a file
+----------------------------------------------------------------------------------------------------
+SUDO - Super User Does
+
+sudo <command> --> To execute a command with root permission[when you face permission denied error]
+
+sudo su 		--> To goto root user
+----------------------------------------------------------------------------------------------------
+Remove the file and directories:
+
+rm <file_name> 			--> To delete a file
+rm -rf <directory_name> --> To delete a directory
+rm -rf * 				--> Remove all the files and directories in the present location
+----------------------------------------------------------------------------------------------------
+Copy:
+
+cp <file_name1> <file_name2> 		--> To copy a file
+cp <file_name> <dir>/<file_name> 	--> To copy a file inside a directory
+cp -r <dir1> <dir2> 				--> To copy a directory
+----------------------------------------------------------------------------------------------------
+Move:
+
+mv <file_name1> <file_name2> 		--> To copy a file
+mv <file_name> <dir>/<file_name> 	--> To copy a file inside a directory
+mv <dir1> <dir2> 					--> To copy a directory
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Link --> To create a shortcut of a file in Linux
+
+ln -s <original_file_path> <softlink_name> --> To create a softlink of the original file
+ln <original_file_path> <softlink_name> --> To create a hardlink of the original file
+
+A softlink will point to the path of the original file, Once the original file gets deleted/Moved, 
+The softlink will not work
+
+Whereas The hardlink points to the inode of a file, Even after deleting/Moving the original file.
+The hardlink will still work
+----------------------------------------------------------------------------------------------------
+
+To list the files:
+ls 		--> To list all the files and directories
+ls -l 	--> To long list the files and directories in long format
+ls -lt	--> To long list the files and directories sorted with time
+ls -lrt --> To long list the files and directories sorted with timein reverse order
+ls –a 	--> To list of regular and hidden file names
+ls -R	--> To view directory tree [tree - can also be used]
+ls -i	--> To list inode and files
+
+inode - Inode stands for Index Node.  Is an unique identification number of a file, which points to the file's memory block
+		Inodes stores metadata about the file it refers to.
+		
+-----------------------------------------------------------------------------------------------------
+
+To change Directory:
+cd <directory_name> --> To change the directory
+cd .. 				--> To go back to a previous directory
+cd 					--> To goto home directory [/home/ec2-user]
+
+To check the current directory:
+pwd					--> To check the present working directory		
+
+-----------------------------------------------------------------------------------------------------
+Miscellaneous
+
+who --> To check all the users that are logged in to the server
+whoami --> To check the current user
+who –r 	--> Default run level in linux
+/etc/inittab -->  Changing the default run level
+
+hostname --> To check the ip address of the system [private ip address]
+curl ifconfig.me --> To check the public ip address
+
+uname 		--> To check the OS
+uname -a 	--> To check all the details of the system
+uname –r 	--> See the version of the kernel use
+uname –m / arch --> To check the architecture of the O/S
+
+init 6 	--> Reboot
+
+/etc/redhat-release 	--> To check the O/S version
+
+lscpu       			--> Display information about the CPU architecture
+-----------------------------------------------------------------------------------------------------
+
+vi - Text Editor
+vi <file_name> --> To open the file for editing
+
+Note: By default VI editor opens in command mode
+
+esc --> To go back to command mode
+i 	--> To enter insert mode in VI
+
+esc + :w --> To save the file
+esc + :q! --> To quit without saving the file
+esc + :wq --> To save and quit from the file
+
+w --> write
+q --> quit
+! --> Forcefully
+
+----------------------------------------------------------------------------------------------------
+cat <file_name> --> To check the contents of the file
+tac <file_name> --> To display the contents of the file in reverse order
+----------------------------------------------------------------------------------------------------
+esc + :set nu --> To set the numbers for the file
+esc + :set nonu --> To remove the numbers
+----------------------------------------------------------------------------------------------------
+Find and Replace strings
+
+esc + :%s/<old_string>/<new_string>/g
+
+% --> All the lines
+s --> Substitute
+g --> Globally [all the occurence of the pattern in the line]
+ig --> Case insensitive replace
+$ --> End of file
+
+esc + 3s/<old_string>/<new_string>/g --> To make the replace only on the 3rd line
+esc + 3,6s/<old_string>/<new_string>/g --> To make the replace only on the 3rd to the 6th line
+esc + 3,$s/<old_string>/<new_string>/g --> To make the replace only on the 3rd to the end of the line
+----------------------------------------------------------------------------------------------------
+esc + dd --> To delete a line in VI
+esc + 3dd --> Deletes 3 lines
+----------------------------------------------------------------------------------------------------
+esc + /pattern --> To search for a pattern in your file
+
+note: Use n to go to the next occurence of the word
+----------------------------------------------------------------------------------------------------
+esc + :undo --> To undo a change
+esc + :redo --> To redo a change
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+uniq and sort
+
+uniq <file_name> --> To display only rhe unique values in a file
+
+The drawback of uniq command is that it can work of the values are adjacent to each other
+
+sort <file_name> --> To sort the values in a file
+sort -r <file_name> --> To sort the values in reverse order
+
+sort <file_name> | uniq --> To sort and eliminate all the duplicate values
+----------------------------------------------------------------------------------------------------
+head --> To print required starting number of lines
+
+head -n <file_name> --> To display the starting n lines
+head <file_name> --> To display the starting 10 lines
+head -3 <file_name> --> To display the starting 3 lines
+----------------------------------------------------------------------------------------------------
+tail --> To print required lines from the bottom
+
+tail -n <file_name> --> To display the last n lines
+tail <file_name> --> To display the last 10 lines
+tail -3 <file_name> --> To display the last 3 lines
+----------------------------------------------------------------------------------------------------
+pipe [|] --> To pass the output of one command to the next command
+
+Example:
+
+head -5 <file_name> | tail -1 --> Print the 5th line of the file 
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Grep - Used to search for strings inside a file
+
+grep "<pattern>" <file_name> 			--> To display all the lines with the matching pattern
+grep -i "<pattern>" <file_name> 		--> Case insensitive search
+
+grep -e "<pattern1>" -e "<pattern2>" 	--> To search for multiple patterns
+
+grep -l "<pattern>" * 					--> To check for the pattern in all the files and display the names of the files
+											that the pattern is present
+
+grep "^<pattern>" 						--> To display all the lines that start with the pattern
+grep "<pattern>$" 						--> To display all the lines that end with the pattern
+
+grep -c "<pattern>" 					--> To count the number of lines the pattern is present
+
+grep -v "<pattern>"						--> To display all the lines that does not have the pattern
+grep -c "^$" <fillename> 				--> To count the number of empty lines
+grep -c -v "^$" <fillename> 			--> To count the number of non empty lines
+
+grep -v -l -R "<pattern>"				--> Displays all the filenames that does not have the pattern
+
+grep -R "<pattern>" 					--> Displays filenames and matching lines (checks recursively (i.e sub folders))
+grep -l -R "<pattern>" 					--> Displays only filenames
+ 
+----------------------------------------------------------------------------------------------------
+sed --> Stream Editor used to find and replace words and much more
+
+sed 's/<old_string>/<new_string>/g' <file_name> 	--> To replace old string with new string
+sed -i 's/<old_string>/<new_string>/g' <file_name> 	--> To replace old string with new string and make changes to the file
+
+sed '2s/<old_string>/<new_string>/g' <file_name> 	--> To replace old string with new string in 2nd line
+sed '2,4s/<old_string>/<new_string>/g' <file_name> 	--> To replace old string with new string from 2nd to 4th line
+sed '2,$s/<old_string>/<new_string>/g' <file_name> 	--> To replace old string with new string from 2nd to end of file
+
+sed '4d' <file_name> 	--> To delete the 4th line
+sed '2,4d' <file_name> 	--> To delete the from 2nd to 4th line
+sed '2,$d' <file_name> 	--> To delete the 2nd to end of the file
+
+sed -n '2p' <file_name> 	--> To print the 2nd line
+sed -n '2,4p' <file_name> 	--> To print the 2nd to the 4th line
+sed -n '2,$p' <file_name> 	--> To print the 2nd to end of file
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Cut - Used to cut a file column wise
+
+cut -d " " -f1 <file_name> --> To display only the 1st column
+cut -d " " -f1,3 <file_name> --> To display only the 1st and 3rd column
+cut -d " " -f2-4 <file_name> --> To display from 2nd to 4th column
+
+d --> Delimiter
+----------------------------------------------------------------------------------------------------
+awk command
+NF - Number of Field
+NR - Number of Row
+
+awk '{print}' <file_name> 				--> To display the contents of the file
+
+awk -F " " '{print$1}' <file_name> 		--> To print the 1st column
+awk -F " " '{print$1,$3}' <file_name> 	--> To print the 1st and 3rd column
+awk -F " " '{print$NF}' <file_name> 	--> To print the last column
+awk -F " " '{print$(NF-1)}' <file_name> --> To print the last but one column
+
+awk 'NR==3 {print}' <file_name> 		--> To print the 3rd row
+awk 'NR==2,NR==4 {print}' <file_name> 	--> To print from 2 to 4th row
+awk 'END {print}' <file_name>			--> To print last row
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Word Count:
+
+wc <file_name> --> The total number of lines, words and character present in the file
+wc -l <file_name> --> The total number of lines present in the file
+wc -c <file_name> --> The total number of characters present in the file
+wc -w <file_name> --> The total number of words present in the file
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Echo --> Print
+
+echo "<text>" 			--> To print the text on the terminal
+echo -e "Hi \nHow are you" 	--> To print with new line using \n
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Redirect(>) and Append(>>)
+
+echo "hello" > <file_name> --> Redirect the output of echo command to the file
+echo "hello" >> <file_name> --> Append the output of echo command to the tip of the existing file
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+tee - Redirect and Append
+
+echo "hello" | tee <file_name> --> To redirect the output of the command to the file and display 
+									the contents on the terminal
+									
+echo "hello" | tee -a <file_name> --> To append using tee command
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Add Users
+
+sudo useradd <user_name> --> To add a user to the server
+sudo passwd <user_name> --> To set the password for the user
+sudo userdel <user_name> --> To delete a user from the server
+
+To check all the users in the server
+
+getent passwd
+cat /etc/passwd
+----------------------------------------------------------------------------------------------------
+To Give a user SUDO permissions
+
+For an user to get Sudo permission, The user needs to be added to the sudoers file [/etc/sudoers]
+
+sudo vi /etc/sudoers --> To edit the sudoers file
+
+<user_name>        ALL=(ALL)       NOPASSWD: ALL
+----------------------------------------------------------------------------------------------------
+Add Groups
+
+sudo groupadd <group_name> --> To add a group to the server
+sudo groupdel <group_name> --> To delete a group from the server
+
+sudo usermod -aG <group_name> <user_name> --> To add an user to a group
+
+To check all the groups in the server
+
+getent group
+cat /etc/group
+----------------------------------------------------------------------------------------------------
+sudo gpasswd -M test,test3 multigroup --> Add multiple users to group
+----------------------------------------------------------------------------------------------------
+
+Permissions in Linux
+
+rw-rw-r--
+rwxrwxr-x
+
+r- Read Permission
+w- Write Permission
+x- Executable Permission
+- --> No permission
+
+rw- --> Owner of the file
+rw- --> Group to which the file belongs
+r-- --> Others
+
+r - 2^2 --> 4
+w - 2^1 --> 2
+x - 2^0 --> 1
+- --> 0
+
+rwx --> 7
+rw --> 6
+x --> 1
+- --> 0
+
+chmod 664 <file_name> --> To give rw for owner, rw for group, r for others
+chmod 777 <file_name> --> to rwx for owner, group and others
+chmod 740 <file_name> --> To give rwx for owner, r for groups, no permission for others
+
+chmod u+x <file_name> --> To give owner the executable permission
+chmod o-w <file_name> --> To Remove write permission from the the others
+
+u --> Owner
+o --> Others
+g --> Groups
+----------------------------------------------------------------------------------------------------
+Sticky bit :
+If sticky bit is applied on a file or directory, then only root and owner of that file or directory can delete it.
+Even if others are having full permissions they cannot delete the file or directory
+
+chmod o+t or #chmod 1766 file/dir (-rwxrwsr-t)
+----------------------------------------------------------------------------------------------------
+Change ownership of files and directories
+
+chown <user_name> <file_name> --> To change the owner of the file
+chgrp <group_name> <file_name> --> To change the group of the file
+
+chown <user_name>:<group_name> <file_name> --> To change owner and the group for the file
+----------------------------------------------------------------------------------------------------
+Defualt Permissions in Linux
+
+Files --> 666
+Directories --> 777
+
+umask 002 --> to change the default permissions of the file and directories to 664 and 775
+umask 022 --> to change the default permissions of the file and directories to 644 and 755
+
+/etc/profile --> To permanently change the umask value
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+Find --> To find files and directories in Linux
+
+find -name <name> --> To search and display all the files and directories with the particular name
+find -iname <name> --> Case Insensitive search
+
+-type f --> To search for only files
+-type d --> To search for only directories
+
+find -mtime -10 --> To find and display all the files and directories created in the last 10 days
+find -mtime +10 --> To find and display all the files and directories created more than 10 days ago
+
+find -type f -perm 664 --> to search for all the file with permission 664
+
+find -type f -empty --> To search for all the empty files
+
+find -maxdepth 1 -name <file_name> --> To only search for the current directory
+ 
+find -type f -empty -delete --> Find and delete all the empty files
+
+find -type -f -size +1M --> Find all the files with size more than 1 MB
+	
+find -type f -not -empty --> Find all non empty files
+----------------------------------------------------------------------------------------------------
+File Size and Disk Size
+
+df -h 	--> To check the disk size of the server
+free -h 	--> To check the system memory of the server [RAM]
+
+du -sh <file_name> --> To check the file size
+----------------------------------------------------------------------------------------------------
+SSH - Secure Shell or Secure Socket Shell
+
+SSH is a network protocol that enables users to access a server in a secure way over an unsecured network
+SSH : 	The Secure Shell Protocol is a cryptographic network protocol for operating network services securely over an unsecured network. 
+		Its most notable applications are remote login and command-line execution. 
+		SSH applications are based on a client–server architecture, connecting an SSH client instance with an SSH server. It's Default port is 22		
+
+Defualt Port:
+
+SSH --> 22
+Apache Tomcat --> 8080
+Jenkins --> 8080
+HTTP --> 80
+Nginx --> 80
+HTTPS --> 443
+
+ssh -i <key_file_path> <user_name>@ip_address --> To SSH into a server
+
+Example:
+
+ssh -i may2022.pem ec2-user@<ip_address>
+
+SSH Passwordless connection:
+
+To generate a key pair:
+ssh-keygen -t rsa
+
+.ssh Folder
+id_rsa --> Private Key
+id_rsa.pub --> Public Key
+
+Copy the contents of the public key to the target server's authorized keys file present in .ssh folders
+
+ssh <user_name>@<ip_address> --> After passwordless connection is established
+----------------------------------------------------------------------------------------------------
+SCP --> To copy files over ssh
+
+scp -i <pem_file_path> <file_to_be_copied_path> <user_name>@<ip_address>:<destination_path> --> To Copy files using ssh
+scp <file_path> <user_name>@<ip_address>:<destination_path> --> when passwordless connection is established
+
+rsync --> With rsync in case of any failure while copying, rsync has the ability to resume where the
+copy has stopped
+----------------------------------------------------------------------------------------------------
+process (ps):
+
+ps -ef --> To show all the running process on the server
+ps -u <user_name> --> To check all the process started by a particular user
+
+kill/killall --> Forcefully stopping a process
+
+kill -9 <PID> --> TO kill a process by its PID
+killall -9 <process_name> --> To kill a process by its name
+killall -9 -u <user_name> --> To kill all the process started by an user
+
+sudo service <process_name> stop --> Gracefully stop a service
+
+Example: sudo service docker stop
+
+top 		--> To check all the process in the server with live updates / top Monitoring all process
+lsof 		--> list of open files
+export -p 	--> Shows all env varialbles on server
+vmstat 	--> reports virtual memory statistics
+----------------------------------------------------------------------------------------------------
+ping <hostname> --> TO check and ping another server
+ex: ping www.google.com
+
+ping 0 --> To ping current server
+----------------------------------------------------------------------------------------------------
+telnet:
+
+Defualt Port: 23
+
+telnet <ip_address/hostname> --> To login to the server
+telnet <ip_address/hostname> <port_number> --> If telnet is on any other port
+
+Telnet is a networking protocol which is used to create a remote connection just like SSH but in
+an unsecured manner. The data being transferred using this protocol is unencrypted
+----------------------------------------------------------------------------------------------------
+netstat --> To check the information about ports in the linux server
+
+To install netstat --> sudo yum install net-tools
+
+netstat -a --> To check all the ports
+netstat -l --> To check all the ports in use
+
+sudo netstat -tulnp --> To check which process is using which tcp or udp port
+----------------------------------------------------------------------------------------------------
+Find the different package installers for different flavors of linux 
+	Redhat - yum
+	Ubuntu - apt-get
+	Centos - yum
+	Debian - dpkg
+	Alpine - apk
+----------------------------------------------------------------------------------------------------
+To check the contents of compressed packages
+unzip -l <.zip_archive>
+tar -ztvf <.targz_archile>
+----------------------------------------------------------------------------------------------------
+Install Apache Tomcat on Linux Server
+
+sudo su
+cd
+yum install java
+yum install jre
+yum install wget
+mkdir /opt/tomcat
+cd /opt/tomcat/
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.62/bin/apache-tomcat-9.0.62.tar.gz
+tar -zxvf apache-tomcat-9.0.62.tar.gz
+chmod +x /opt/tomcat/apache-tomcat-9.0.62/bin/*.sh
+ln -s /opt/tomcat/apache-tomcat-9.0.62/bin/startup.sh /usr/bin/tomcatup
+ln -s /opt/tomcat/apache-tomcat-9.0.62/bin/shutdown.sh /usr/bin/tomcatdown
+
+( Can change port number if needed here - vi /opt/tomcat/apache-tomcat-9.0.62/conf/server.xml )
+
+vi /opt/tomcat/apache-tomcat-9.0.62/conf/tomcat-users.xml	
+  Add These Lines :
+  <role rolename="manager-gui"/>
+  <role rolename="manager-script"/>
+  <role rolename="admin-gui"/>
+  <role rolename="admin-script"/>
+  <user username="admin" password="admin" roles="admin-gui, admin-script, manager-gui, manager-script"/>
+
+vi /opt/tomcat/apache-tomcat-9.0.62/webapps/manager/META-INF/context.xml
+	COmment Out This Line :
+	<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+
+vi /opt/tomcat/apache-tomcat-9.0.62/webapps/host-manager/META-INF/context.xml
+	COmment Out This Line :
+	<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+         allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+
+tomcatup
+
+http://IP:8080
+--------------------------------------------------------------------------------------------------------
+JOB AUTOMATION - CRON JOBS
+
+A Cron Job is a linux command used for scheduling tasks to be executed periodically
+
+/etc/crontab is the file which stores all scheduled jobs (This is a file which contains all the cron entries)
+
+Crontab format [min hr day month dayof week command]
+Ex : [30 2 21 10 6 command/sh file] On 21st Oct Saturday 2 30 AM
+
+* is treated as a wild card. Meaning any possible value.
+*/5 is treated as ever 5 minutes, hours, days, or months. Replacing the 5 with another numerical value will change this option.
+
+crontab –e 				--> Edit your crontab file, or create one if it doesn’t already exist
+crontab –l 				--> Display your crontab file.
+crontab –r 				--> Remove your crontab file.
+crontab -u 				--> If combined with –e, edit a particular user’s Crontab file and if combined with –l, display a particular user’s crontab file. If combined with –r, deletes a particular user’s Crontab file
+# crontab –l 			--> Check the cron jobs
+# crontab –l –u user 	--> Check a user’s cron job
+# tty 					--> Check the console on which you are working by following command
+# crontab –e 			--> Schedule the task as shown below and assign a job in vi editor
+# crontab –e -u user 	--> Schedule a job for user
+# service crond restart --> Restart the cron services
+# vim /etc/cron.deny 	--> Restrict users from using cron jobs(add users, save and exit)
+# vim /etc/cron.allow 	--> Only these users can use using cron jobs
+
+--------------------------------------------------------------------------------------------------------
+Mail Command:
+
+sendmail, postfix, mailx
+
+echo "content" | mail -s "subject" -c "cc" -b "bcc" -a "<attachment_file_path>" <email_id>
+mail -s "subject" <email_id> < <file_name>
+--------------------------------------------------------------------------------------------------------
+
+Loadaverage : The load average is the average system load on a Linux server for a defined period of time.
+w or uptime --> gives load average
+
+Ex:
+
+loadaverage 0.4 1 5
+
+60% free in last 1 minute
+
+100% in use in last 5 minutes
+
+400% overloaded in last 15 minutes
+----------------------------------------------------------------------------------------------------
+What is logical volume?
+Logical volume management (LVM) is a form of storage virtualization for managing disk storage space.
+Logical Volume Management enables the combining of multiple individual hard drives and/or disk partitions into a single volume group (VG). 
+That volume group can then be subdivided into logical volumes (LV) or used as a single large volume
+
+# lvs 				--> Displays all the logical volumes in the system
+# lvdisplay 		--> Displays detailed information on logical volumes
+
+
+Block volume: 
+A detachable block storage device that allows you to dynamically expand the storage capacity of an instance.
+commad --> lsblk
+
+file name that does not have pattern?
+grep -v -l -R "<pattern>"	--> To check for all the files that does not have the pattern
+
+count no of empty lines?
+grep -c -v "^$" <filename>
+
+diff pckg installers for diff in flavours?
+Centos/RHEL - yum
+ubuntu - apt-get
+debian - dpkg
+alpine - apk
+
+swap memory - Swap memory acts as a backup option for RAM when it runs short of space
+
+set
+set -x --> Prints commands and their arguments as they are executed
+set -e --> To stop a script immediately when a command exits with non zero status
+set -t --> Exits after reading and executing only one command
+set -n --> Read commands but do not execute them.
+set -v --> Print shell input lines as they are read
+
+Load Average - w , uptime
+It is the average load on the server for a defined period of time
+(1, 5 and 15 mins)
+
+uname -r --> To check Kernal Version
+
+A zombie process is a process whose execution is completed but it still has an entry in the process table. 
+Zombie processes usually occur for child processes, as the parent process still needs to read its child’s exit status. 
+Once this is done using the wait system call, the zombie process is eliminated from the process table.
+kill -s SIGCHLD <pid> --> To kill Zombie process
+
+Run Levels in Linux
+The running status of the server
+Looks at the /etc/inittab file to decide the Linux run level.
+Following are the available run levels
+0 – halt
+1 – Single user mode
+2 – Multiuser, without NS
+3 – Multiuser mode with NS
+4 – unused
+5 – X11 - GUI mode
+6 – reboot
+
+who -r --> To check run level in Linux
+
+egrep :
